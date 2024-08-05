@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D3.js Axes and Gridlines Example</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .axis path,
+        .axis line {
+            fill: none;
+            shape-rendering: crispEdges;
+        }
+
+        .grid line {
+            stroke: lightgrey;
+            stroke-opacity: 0.7;
+            shape-rendering: crispEdges;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Sample data
+        const data = [30, 80, 45, 60, 20];
+
+        // Set up SVG dimensions
+        const width = 500;
+        const height = 300;
+        const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+
+        const svgWidth = width + margin.left + margin.right;
+        const svgHeight = height + margin.top + margin.bottom;
+
+        // Create SVG element
+        const svg = d3.select("body").append("svg")
+            .attr("width", svgWidth)
+            .attr("height", svgHeight);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);  // group g for postioing svg 
+
+        // Define scales
+        const xScale = d3.scaleBand()
+            .domain(data.map((_, i) => i))
+            .range([0, width])
+            .padding(0.1);
+
+//             data.map((d, i) => {
+//     console.log(`Index ${i}, x position: ${xScale(i)}`);
+// });
+
+        const yScale = d3.scaleLinear()
+            .domain([0, d3.max(data)])
+            .nice()
+            .range([height, 0]);
+
+//             data.map((d, i) => {
+//     console.log(`Index ${i}, y position: ${yScale(d)}`);
+// });
+
+        // Create bars
+        g.selectAll("rect")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", (d, i) => xScale(i))
+            .attr("y", d => yScale(d))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => height - yScale(d))
+            .attr("fill", "steelblue");
+
+        // Create x-axis
+        const xAxis = d3.axisBottom(xScale)
+            .tickFormat(i => `Item ${i + 1}`);
+        g.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", `translate(0,${height})`)
+            .call(xAxis);
+
+        // Create y-axis
+        const yAxis = d3.axisLeft(yScale);
+        g.append("g")
+            .attr("class", "y-axis")
+            .call(yAxis);
+
+        // Add gridlines for y-axis
+        const yGridlines = d3.axisLeft(yScale)
+            .tickSize(-width)
+            .tickFormat('');
+        g.append("g")
+            .attr("class", "grid")
+            .call(yGridlines);
+
+    </script>
+</body>
+</html>

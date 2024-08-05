@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+
+    <script>
+        const treeData = {
+    name: "Root",
+    children: [
+        {name: "Child 1", children: [{name: "Grandchild 1"}, {name: "Grandchild 2"}]},
+        {name: "Child 2"}
+    ]
+};
+
+// Set up a tree layout
+const root = d3.hierarchy(treeData);
+const treeLayout = d3.tree().size([300, 200]);
+treeLayout(root);
+
+// Set up SVG canvas
+const svg = d3.select("body").append("svg")
+    .attr("width", 500)
+    .attr("height", 300)
+    .append("g")
+    .attr("transform", "translate(50,50)");
+
+// Add links between nodes
+svg.selectAll("line")
+    .data(root.links())
+    .enter().append("line")
+    .attr("x1", d => d.source.x)
+    .attr("y1", d => d.source.y)
+    .attr("x2", d => d.target.x)
+    .attr("y2", d => d.target.y)
+    .attr("stroke", "black");
+
+// Add nodes
+svg.selectAll("circle")
+    .data(root.descendants())
+    .enter().append("circle")
+    .attr("cx", d => d.x)
+    .attr("cy", d => d.y)
+    .attr("r", 5)
+    .attr("fill", "steelblue");
+
+// Add labels
+svg.selectAll("text")
+    .data(root.descendants())
+    .enter().append("text")
+    .attr("x", d => d.x + 10)
+    .attr("y", d => d.y)
+    .text(d => d.data.name);
+
+   
+
+
+
+    </script>
+    
+</body>
+</html>

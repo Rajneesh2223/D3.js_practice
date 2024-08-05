@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Data Visualization</title>
+    <style>
+        /* Add some basic styling */
+        .bar {
+            fill: steelblue;
+        }
+        .bar:hover {
+            fill: orange;
+        }
+    </style>
+</head>
+<body>
+     <div id="chart"></div>
+    <script>
+       // Set dimensions and margins for the chart
+const margin = { top: 20, right: 30, bottom: 40, left: 40 };
+const width = 800 - margin.left - margin.right;
+const height = 600 - margin.top - margin.bottom;
+
+// Append SVG to the body of the page
+const svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+// Set up scales
+const x = d3.scaleBand()
+    .range([0, width])
+    .padding(0.1);
+
+const y = d3.scaleLinear()
+    .range([height, 0]);
+
+// Load data from JSON file
+d3.json("data.json").then(data => {
+    // Compute count of each job title
+    const jobCounts = d3.rollup(data, v => v.length, d => d["Job Title"]);
+    const formattedData = Array.from(jobCounts, ([key, value]) => ({ "Job Title": key, "Count": value }));
+
+    // Set domain for x and y scales
+    x.domain(formattedData.map(d => d["Job Title"]));
+    y.domain([0, d3.max(formattedData, d => d["Count"])]);
+
+    // Add bars
+    svg.selectAll(".bar")
+        .data(formattedData)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", d => x(d["Job Title"]))
+        .attr("y", d => y(d["Count"]))
+        .attr("width", x.bandwidth())
+        .attr("height", d => height - y(d["Count"]))
+        .attr("fill", "steelblue");
+
+    // Add x axis
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickSize(5))
+        .selectAll("text")
+        .attr("class", "axis-label")
+        .style("text-anchor", "end")
+        .attr("dx", "-.5em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
+
+    // Add y axis
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(d3.axisLeft(y))
+        .selectAll("text")
+        .attr("class", "axis-label");
+}).catch(error => {
+    console.error('Error loading or parsing data:', error);
+});
+
+
+    </script>
+</body>
+</html>

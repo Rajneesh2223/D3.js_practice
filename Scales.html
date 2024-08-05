@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Scales example </title>
+</head>
+<body>
+    <svg width="400" height=""400> </svg>
+   
+
+    <script>    
+    // Linear Example 
+    // const data = [10,20,30,40,50];
+        // printing circles  c1 c2 c3 on the x position 
+    // const scale = d3.scaleLinear()
+    //                 .domain([0, d3.max(data)])
+    //                 .range([0,500])
+
+    //                 const svg = d3.select("svg")
+                               
+    //                     svg.selectAll("circle")
+    //                              .data(data)
+    //                              .enter()
+    //                              .append("circle")
+    //                              .attr("cx" , d => scale(d))
+    //                              .attr("cy", 100)
+    // //                              .attr("r",50)
+    // ---------------------------------- Ordinal Scales 
+                    //   const categories = ["A", "B", "C", "D"];
+                    //   const colorScale = d3.scaleOrdinal()
+                    //                         .domain(categories)
+                    //                         .range(["red", "green", "blue", "orange"]);
+
+                    //     const svg = d3.select("svg");
+                    //             svg.selectAll("circle")
+                    //                 .data(categories)
+                    //                 .enter()
+                    //                 .append("circle")
+                    //                 .attr("cx" , (d, i ) => (i+1)*100)
+                    //                 .attr("cy" ,50)
+                    //                 .attr("r",30)
+                    //                 .attr('fill' , d => colorScale(d));
+
+    // ----------------------------- band scales 
+//     const data = [30, 80, 45, 60, 20, 90];
+
+// const xScale = d3.scaleBand()
+//     .domain(data.map((d, i) => i))  // Use indices as domain
+//     .range([0, 500])
+//     .padding(0.4);  // Adds padding between bars
+
+// const yScale = d3.scaleLinear()
+//     .domain([0, d3.max(data)])
+//     .range([100, 0]);  // Inverted range for y-axis
+
+// const svg = d3.select("svg");
+
+// svg.selectAll("rect")
+//     .data(data)
+//     .enter()
+//     .append("rect")
+//     .attr("x", (d, i) => xScale(i))  // Use the index to get x position
+//     .attr("y", d => yScale(d))
+//     .attr("width", xScale.bandwidth())  // Width of the bars
+//     .attr("height", d => 100 - yScale(d))
+//     .attr("fill", "steelblue");
+// const data = [10, 20, 30, 40, 50];
+
+// const colorScale = d3.scaleSequential(d3.interpolateBlues)
+//     .domain([0, d3.max(data)]);
+
+// const svg = d3.select("svg");
+
+// svg.selectAll("rect")
+//     .data(data)
+//     .enter()
+//     .append("rect")
+//     .attr("x", (d, i) => i * 60)
+//     .attr("y", 20)
+//     .attr("width", 50)
+//     .attr("height", 50)
+//     .attr("fill", d => colorScale(d));
+
+
+
+    </script>
+    
+</body>
+</html>

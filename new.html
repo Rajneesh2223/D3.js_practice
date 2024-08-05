@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>D3 Arc Example</title>
+</head>
+<body>
+    <!-- <svg width="400" height="400"></svg> -->
+        <ul id="list"></ul>
+
+    <script>    
+      // Select the SVG element
+//       const svg = d3.select("svg");
+
+//       // Append a path element to the SVG
+//       svg.append("path")
+//         .attr("transform", "translate(200,200)") // Center the arc in the middle of the SVG
+//         .attr("d", d3.arc()({
+//             innerRadius: 0,
+//   outerRadius: 100,
+//   startAngle: 0,
+//   endAngle: Math.PI / 2
+//         }))
+//         .attr("fill", "steelblue"); // Optional: Add some color
+
+// svg.append("path").attr("d", line(data)).attr("stroke", "currentColor");
+                // const circles = d3.selectAll("circle");
+
+                // circles.each( function ( d , i ){
+                //     d3.select(this)
+                //         .attr("fill " ,  `rgb(${i * 20}, 0, ${255 - i * 20})`);
+                    
+                // });
+
+//                // Sample data
+// const data = [12, 55, 29, 44, 91];
+
+// // Create SVG element
+// const svg = d3.select("body")
+//   .append("svg")
+//   .attr("width", 500)
+//   .attr("height", 300);
+
+// const svgHeight = 300; // Define the height at which bars should start
+
+// // Create bars
+// const bars = svg.selectAll("rect")
+//   .data(data)
+//   .enter()
+//   .append("rect")
+//   .attr("x", (d, i) => i * 50 +10)
+//   .attr("width", 40)
+//   .attr("y", svgHeight) // Initial position of the bars
+//   .attr("height", 0); // Initial height of the bars
+
+// // Use selection.each() to set the height of each bar
+// bars.each(function(d) {
+//   d3.select(this)
+//     .transition() // Add a transition for animation
+//     .duration(4000)
+//     .attr("y", svgHeight - d) // y is the height from the top of the page svgheight - d = y 
+//     .attr("height", d); // Set height based on the data value
+// });
+
+// const peopleData = [
+//   { firstName: "John", lastName: "Doe" },
+//   { firstName: "Jane", lastName: "Smith" },
+//   { firstName: "Alice", lastName: "Johnson" }
+// ];
+
+// // Select the body and bind the data
+// const people = d3.select("body")
+//                 .selectAll("div")
+//                 .data(peopleData)
+//                 .enter()
+//                 .append("div")
+//                 .text(d => `${d.firstName} ${d.lastName}`) // Set the text content of each div
+//                 .call(name, d => d.firstName, d => d.lastName); // Call the name function
+
+// function name(selection, first, last) {
+//   selection
+//       .attr("first-name", first)
+//       .attr("last-name", last);
+// }
+
+// // -------------------arcs
+// const width = 400, height = 400;
+
+// const arc = d3.arc()
+//     .innerRadius(50) // Corrected method name
+//     .outerRadius(100) // Corrected method name
+//     .startAngle(0)
+//     .endAngle(Math.PI / 2);
+
+// const svg = d3.select("svg")
+//     .attr("width", width)
+//     .attr("height", height);
+
+// svg.append('path')
+//     .attr("d", arc)
+//     .attr("fill", "steelblue")
+//     .attr("transform", `translate(${width / 2}, ${height / 2})`); // Corrected method name and typo
+// ========================= pie chart 
+        // const data =[10,20,30,40];
+
+        // const width=400 , height =400 ;
+        // const radius = Math.min(width,height)/2;
+     
+        // const pie = d3.pie();
+       
+        // const arc = d3.arc()
+        //                 .innerRadius(100)
+        //                 .outerRadius(radius)
+
+        //                 const svg = d3.select('svg')
+        //                             .attr("width",width)
+        //                             .attr("height",height)
+        //                             .append('g')
+        //                             .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+        //                 const arcs = svg.selectAll("arc")
+        //                                 .data(pie(data))
+        //                                 .enter()
+        //                                 .append("path")
+        //                                 .attr("d", arc)
+        //                                 .attr("fill", (d, i) => d3.schemeCategory10[i]);
+//----------------------------  data binging
+                        // const  data = ["banana ", "apple " , "mango"] ;
+                        //        const list = d3.select("#list")
+                        //                     .selectAll("li")
+                        //                     .data(data)
+                        //                     .enter()
+                        //                     .append("li")
+                        //                     .text(d => d);
+// updating the data 
+//  const newData = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
+//
+// const listUpdate = d3.select("#list")
+//     .selectAll("li")
+//     .data(newData);
+
+// // Update existing items
+// listUpdate
+//     .text(d => d);
+
+// // Handle new data (Enter selection)
+// listUpdate
+//     .enter()
+//     .append("li")
+//     .text(d => d);
+
+// updating the previous data 
+
+// const shorterData = ["Apple", "Banana"];
+
+// const listExit = d3.select("#list")
+//     .selectAll("li")
+//     .data(shorterData);
+
+// // Update existing items
+// listExit
+//     .text(d => d);
+
+// // Handle new data (Enter selection)
+// listExit
+//     .enter()
+//     .append("li")
+//     .text(d => d);
+
+// // Remove extra elements (Exit selection)
+// listExit
+//     .exit()
+//     .remove();
+
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

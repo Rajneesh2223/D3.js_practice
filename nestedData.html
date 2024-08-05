@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+
+    <script>
+        const nestedData = [
+    {name: "Group 1", values: [10, 20, 30]},
+    {name: "Group 2", values: [15, 25, 35]},
+    {name: "Group 3", values: [5, 15, 25]}
+];
+// Set up SVG canvas
+const svg = d3.select("body").append("svg")
+    .attr("width", 500)
+    .attr("height", 300);
+
+// Scale for the groups and individual bars
+const x0 = d3.scaleBand()
+    .domain(nestedData.map(d => d.name))
+    .range([0, 500])
+    .padding(0.1);
+
+const x1 = d3.scaleBand()
+    .domain([0, 1, 2]) // Three values per group
+    .range([0, x0.bandwidth()])
+    .padding(0.05);
+
+const y = d3.scaleLinear()
+    .domain([0, d3.max(nestedData, d => d3.max(d.values))])
+    .range([300, 0]);
+
+// Bind data and create groups
+const groups = svg.selectAll("g")
+    .data(nestedData)
+    .enter().append("g")
+    .attr("transform", d => `translate(${x0(d.name)},0)`);
+
+// Bind data to bars within each group
+groups.selectAll("rect")
+    .data(d => d.values)
+    .enter().append("rect")
+    .attr("x", (d, i) => x1(i))
+    .attr("y", d => y(d))
+    .attr("width", x1.bandwidth())
+    .attr("height", d => 300 - y(d))
+    .attr("fill", "steelblue");
+
+
+
+
+
+    </script>
+    
+</body>
+</html>
